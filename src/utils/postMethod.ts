@@ -8,6 +8,8 @@ export const postMethod = (url: string, req: IncomingMessage, res: ServerRespons
       postUser(req, res);
       break;
     default:
+      res.writeHead(404, { ContentType: 'application/json' });
+      res.end(JSON.stringify({ message: 'Not Found' }));
       break;
   }
 };

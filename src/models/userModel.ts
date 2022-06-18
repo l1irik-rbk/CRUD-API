@@ -18,8 +18,16 @@ export const findUser = (id: string) => {
 
 export const createUser = (user: User) => {
   return new Promise((resolve, reject) => {
-    const newUser = { ...user, id: uuidv4() } as User;
+    const newUser = { id: uuidv4(), ...user } as User;
     users.push(newUser);
     resolve(newUser);
+  });
+};
+
+export const updateUser = (id: string, user: User) => {
+  return new Promise((resolve, reject) => {
+    const userIndex = users.findIndex((user) => user.id === id);
+    users[userIndex] = { id, ...user };
+    resolve(users[userIndex]);
   });
 };

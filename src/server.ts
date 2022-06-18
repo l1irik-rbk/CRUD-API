@@ -3,6 +3,7 @@ import http, { IncomingMessage, Server, ServerResponse } from 'http';
 
 import { getMethod } from './utils/getMethod';
 import { postMethod } from './utils/postMethod';
+import { putMethod } from './utils/putMethod';
 
 dotenv.config();
 
@@ -15,6 +16,9 @@ const server: Server = http.createServer((req: IncomingMessage, res: ServerRespo
       break;
     case 'POST':
       postMethod(req.url as string, req, res);
+      break;
+    case 'PUT':
+      putMethod(req.url as string, req, res);
       break;
     default:
       res.writeHead(404, { ContentType: 'application/json' });
