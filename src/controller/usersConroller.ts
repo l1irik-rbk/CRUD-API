@@ -9,7 +9,8 @@ export const getUsers = async (res: ServerResponse) => {
     res.writeHead(200, { ContentType: 'application/json' });
     res.end(JSON.stringify(users));
   } catch (error) {
-    console.error(error);
+    res.writeHead(500, { ContentType: 'application/json' });
+    res.end(JSON.stringify({ message: 'bad request' }));
   }
 };
 
@@ -24,7 +25,8 @@ export const getUser = async (res: ServerResponse, id: string) => {
       res.end(JSON.stringify(user));
     }
   } catch (error) {
-    console.error(error);
+    res.writeHead(500, { ContentType: 'application/json' });
+    res.end(JSON.stringify({ message: 'bad request' }));
   }
 };
 
@@ -40,7 +42,7 @@ export const postUser = async (req: IncomingMessage, res: ServerResponse) => {
       const { username, age, hobbies } = JSON.parse(body);
 
       if (!username || !age || !hobbies) {
-        res.writeHead(201, { ContentType: 'application/json' });
+        res.writeHead(400, { ContentType: 'application/json' });
         res.end(JSON.stringify({ message: 'Body does not contain required fields' }));
         return;
       }
@@ -57,7 +59,8 @@ export const postUser = async (req: IncomingMessage, res: ServerResponse) => {
       res.end(JSON.stringify(newUser));
     });
   } catch (error) {
-    console.error(error);
+    res.writeHead(500, { ContentType: 'application/json' });
+    res.end(JSON.stringify({ message: 'bad request' }));
   }
 };
 
@@ -91,7 +94,8 @@ export const putUser = async (req: IncomingMessage, res: ServerResponse, id: str
       });
     }
   } catch (error) {
-    console.error(error);
+    res.writeHead(500, { ContentType: 'application/json' });
+    res.end(JSON.stringify({ message: 'bad request' }));
   }
 };
 
@@ -103,10 +107,11 @@ export const deleteUser = async (res: ServerResponse, id: string) => {
       res.end(JSON.stringify({ message: 'Not Found' }));
     } else {
       await removeUser(id);
-      res.writeHead(200, { ContentType: 'application/json' });
+      res.writeHead(204, { ContentType: 'application/json' });
       res.end(JSON.stringify({ message: 'The record is found and deleted' }));
     }
   } catch (error) {
-    console.error(error);
+    res.writeHead(500, { ContentType: 'application/json' });
+    res.end(JSON.stringify({ message: 'bad request' }));
   }
 };
