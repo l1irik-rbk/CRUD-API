@@ -1,7 +1,8 @@
-import { getMethod } from './utils/getMethod';
-import { getUsers } from './controller/usersConroller';
 import dotenv from 'dotenv';
 import http, { IncomingMessage, Server, ServerResponse } from 'http';
+
+import { getMethod } from './utils/getMethod';
+import { postMethod } from './utils/postMethod';
 
 dotenv.config();
 
@@ -11,6 +12,9 @@ const server: Server = http.createServer((req: IncomingMessage, res: ServerRespo
   switch (req.method) {
     case 'GET':
       getMethod(req.url as string, res);
+      break;
+    case 'POST':
+      postMethod(req.url as string, req, res);
       break;
     default:
       res.writeHead(404, { ContentType: 'application/json' });

@@ -1,7 +1,5 @@
 import { ServerResponse } from 'http';
 import { getUser, getUsers } from './../controller/usersConroller';
-import { v4 as uuidv4 } from 'uuid';
-import { validate as uuidValidate } from 'uuid';
 import { uuidValidateV4 } from './uuidValidateV4';
 
 export const getMethod = (url: string, res: ServerResponse) => {
