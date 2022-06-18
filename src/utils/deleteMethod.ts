@@ -1,11 +1,12 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { deleteUser } from './../controller/usersConroller';
+import { getId } from './getId';
 import { uuidValidateV4 } from './uuidValidateV4';
 
 export const deleteMethod = (url: string, req: IncomingMessage, res: ServerResponse) => {
   switch (url) {
     case `${url.match(/^\/api\/users\/[\w-]+$/)}`:
-      const id = url.split('/')[3];
+      const id = getId(url);
       const idIsValid = uuidValidateV4(id);
 
       if (!idIsValid) {

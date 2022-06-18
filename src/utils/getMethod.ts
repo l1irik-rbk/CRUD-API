@@ -1,5 +1,6 @@
 import { ServerResponse } from 'http';
 import { getUser, getUsers } from './../controller/usersConroller';
+import { getId } from './getId';
 import { uuidValidateV4 } from './uuidValidateV4';
 
 export const getMethod = (url: string, res: ServerResponse) => {
@@ -8,7 +9,7 @@ export const getMethod = (url: string, res: ServerResponse) => {
       getUsers(res);
       break;
     case `${url.match(/^\/api\/users\/[\w-]+$/)}`:
-      const id = url.split('/')[3];
+      const id = getId(url);
       const idIsValid = uuidValidateV4(id);
 
       if (!idIsValid) {
