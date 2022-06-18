@@ -1,7 +1,7 @@
 import { User } from '../utils/interfaces';
 import { v4 as uuidv4 } from 'uuid';
 
-const users: User[] = require('../../data/data.json');
+let users: User[] = require('../../data/data.json');
 
 export const findAllUsers = () => {
   return new Promise((resolve, reject) => {
@@ -29,5 +29,12 @@ export const updateUser = (id: string, user: User) => {
     const userIndex = users.findIndex((user) => user.id === id);
     users[userIndex] = { id, ...user };
     resolve(users[userIndex]);
+  });
+};
+
+export const removeUser = (id: string) => {
+  return new Promise<void>((resolve, reject) => {
+    users = users.filter((user) => user.id !== id);
+    resolve();
   });
 };

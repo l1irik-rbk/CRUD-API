@@ -1,4 +1,4 @@
-import { updateUser } from './../models/userModel';
+import { removeUser, updateUser } from './../models/userModel';
 import { User } from '../utils/interfaces';
 import { ServerResponse, IncomingMessage } from 'http';
 import { createUser, findAllUsers, findUser } from '../models/userModel';
@@ -89,6 +89,22 @@ export const putUser = async (req: IncomingMessage, res: ServerResponse, id: str
         res.writeHead(200, { ContentType: 'application/json' });
         res.end(JSON.stringify(updUser));
       });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteUser = async (res: ServerResponse, id: string) => {
+  try {
+    const user = (await findUser(id)) as User;
+    if (!user) {
+      res.writeHead(404, { ContentType: 'application/json' });
+      res.end(JSON.stringify({ message: 'Not Found' }));
+    } else {
+      await removeUser(id);
+      res.writeHead(200, { ContentType: 'application/json' });
+      res.end(JSON.stringify({ message: 'The record is found and deleted' }));
     }
   } catch (error) {
     console.error(error);
