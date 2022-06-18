@@ -2,8 +2,6 @@ import { getMethod } from './utils/getMethod';
 import { getUsers } from './controller/usersConroller';
 import dotenv from 'dotenv';
 import http, { IncomingMessage, Server, ServerResponse } from 'http';
-import { v4 as uuidv4 } from 'uuid';
-import { validate as uuidValidate } from 'uuid';
 
 dotenv.config();
 

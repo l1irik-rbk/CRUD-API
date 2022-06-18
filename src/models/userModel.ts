@@ -7,3 +7,10 @@ export const findAllUsers = () => {
     resolve(users);
   });
 };
+
+export const findUsers = (id: string) => {
+  return new Promise((resolve, reject) => {
+    const user = users.find((user) => user.id === id);
+    resolve(user);
+  });
+};
