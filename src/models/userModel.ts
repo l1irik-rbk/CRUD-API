@@ -18,6 +18,7 @@ export const findUser = (id: string) => {
 
 export const createUser = (user: User) => {
   return new Promise((resolve, reject) => {
+    console.log('createUser');
     const newUser = { id: uuidv4(), ...user } as User;
     users.push(newUser);
     resolve(newUser);

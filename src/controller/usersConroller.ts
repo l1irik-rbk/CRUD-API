@@ -39,24 +39,28 @@ export const postUser = async (req: IncomingMessage, res: ServerResponse) => {
     });
 
     req.on('end', async () => {
-      const { username, age, hobbies } = JSON.parse(body);
+      try {
+        const { username, age, hobbies } = JSON.parse(body);
 
-      if (!username || !age || !hobbies) {
-        res.writeHead(400, { ContentType: 'application/json' });
-        res.end(JSON.stringify({ message: 'Body does not contain required fields' }));
-        return;
+        if (!username || !age || !hobbies) {
+          res.writeHead(400, { ContentType: 'application/json' });
+          res.end(JSON.stringify({ message: 'Body does not contain required fields' }));
+          return;
+        }
+
+        const user: User = {
+          username,
+          age,
+          hobbies,
+        };
+
+        const newUser = (await createUser(user)) as User;
+        res.writeHead(201, { ContentType: 'application/json' });
+        res.end(JSON.stringify(newUser));
+      } catch (error) {
+        res.writeHead(500, { ContentType: 'application/json' });
+        res.end(JSON.stringify({ message: 'bad request' }));
       }
-
-      const user: User = {
-        username,
-        age,
-        hobbies,
-      };
-
-      const newUser = await createUser(user);
-
-      res.writeHead(201, { ContentType: 'application/json' });
-      res.end(JSON.stringify(newUser));
     });
   } catch (error) {
     res.writeHead(500, { ContentType: 'application/json' });
