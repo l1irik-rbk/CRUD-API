@@ -9,6 +9,7 @@ import { putMethod } from './utils/putMethod';
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
+const pid = process.pid;
 
 const server: Server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
   switch (req.method) {
@@ -31,4 +32,4 @@ const server: Server = http.createServer((req: IncomingMessage, res: ServerRespo
   }
 });
 
-server.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));
+server.listen(PORT, () => console.log(`Server started on PORT ${PORT}. Pid: ${pid}`));
