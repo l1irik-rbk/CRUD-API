@@ -11,7 +11,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 const pid = process.pid;
 
-const server: Server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
+export const server: Server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
   switch (req.method) {
     case 'GET':
       getMethod(req.url as string, res);
