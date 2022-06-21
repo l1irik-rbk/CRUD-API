@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cce3e92a-0a55-4e69-a3a9-7d8d755e8947",
+    "username": "Anton",
+    "age": 23,
+    "hobbies": ["saf"]
+  },
+  {
+    "id": "d01ede83-46f4-4265-9e87-51d601240b19",
+    "username": "Dennis",
+    "age": 45,
+    "hobbies": ["saf124124", "gsagsgs"]
+  },
+  {
+    "id": "f2367fcc-624f-4d58-9d1b-681111034bc8",
+    "username": "Vadim",
+    "age": 18,
+    "hobbies": []
+  }
+]
